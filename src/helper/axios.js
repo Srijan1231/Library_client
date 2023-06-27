@@ -1,13 +1,10 @@
 import axios from "axios";
-export const postUser = async (data) => {
+export const postUser = async (userData) => {
   const rootAPI = "http://localhost:8000";
   const userAPI = rootAPI + "/api/v1/user";
   try {
-    const resp = await axios.post(userAPI, data);
-    return {
-      status: "success",
-      message: resp.data.message,
-    };
+    const { data } = await axios.post(userAPI, userData);
+    return data;
   } catch (error) {
     return {
       status: "error",
