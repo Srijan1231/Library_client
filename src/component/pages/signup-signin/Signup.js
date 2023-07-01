@@ -8,9 +8,13 @@ import { Header } from "../../layout/Header.js";
 import { Footer } from "../../layout/Footer.js";
 import { toast } from "react-toastify";
 import { postUser } from "../../../helper/axios.js";
+import { useSelector } from "react-redux";
 
 const SignUp = () => {
-  const [form, setForm] = useState({});
+  const { user } = useSelector((state) => state.userInfo);
+  const [form, setForm] = useState({
+    role: "student",
+  });
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -100,7 +104,7 @@ const SignUp = () => {
       <Header />
       <section className="main">
         <Form className="m-5 p-5 border shadow-lg" onSubmit={handleOnSubmit}>
-          <h1>Add New Admin</h1>
+          <h1>Create New Admin</h1>
           <hr />
           {inputs.map((item, i) => (
             <CustomInput key={i} {...item} onChange={handleOnChange} />

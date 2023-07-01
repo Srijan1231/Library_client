@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useState } from "react";
@@ -6,11 +6,21 @@ import { Header } from "../../layout/Header";
 import { Footer } from "../../layout/Footer";
 import CustomInput from "../../custom-input/CustomInput";
 import { signInAdminAction } from "./userAction";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Signin = () => {
   const [form, setForm] = useState();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.userInfo);
+
+  user?._id && navigate("/dashboard");
+
+  useEffect(() => {
+    user?._id && navigate("/dashboard");
+  }, [user?._id, navigate]);
+
   const handleOnChange = (e) => {
     const { name, value } = e.target;
     setForm({
