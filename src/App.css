@@ -1,10 +1,14 @@
-.main{
-  min-height: calc(100vh - 176px);
+.main {
+  min-height: calc(100vh - 169px);
 }
-ul{
-  list-style: none;
+
+.left-menu {
+  width: 250px;
+  min-height: 100vh;
 }
-.left-menu{
-  width:250px;
-  min-height:100vh;
+
+.left-menu li {
+  margin-left: 2rem;
+  margin-top: 1rem;
+  font-weight: bold;
 }

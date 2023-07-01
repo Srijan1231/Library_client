@@ -1,17 +1,17 @@
 import React, { useState } from "react";
-
+import { Header } from "../../components/layout/Header";
+import { Footer } from "../../components/layout/Footer";
+import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-
-import { Button } from "react-bootstrap";
-import CustomInput from "../../custom-input/CustomInput.js";
-import { Header } from "../../layout/Header.js";
-import { Footer } from "../../layout/Footer.js";
+import { CustomInput } from "../../components/custom-input/CustomInput";
+import { BiSolidUserDetail } from "react-icons/bi";
 import { toast } from "react-toastify";
-import { postUser } from "../../../helper/axios.js";
+import { postUser } from "../../helper/axios";
 import { useSelector } from "react-redux";
 
-const SignUp = () => {
+const Signup = () => {
   const { user } = useSelector((state) => state.userInfo);
+
   const [form, setForm] = useState({
     role: "student",
   });
@@ -104,15 +104,29 @@ const SignUp = () => {
       <Header />
       <section className="main">
         <Form className="m-5 p-5 border shadow-lg" onSubmit={handleOnSubmit}>
-          <h1>Create New Admin</h1>
+          <h1>
+            <BiSolidUserDetail />
+            Create New Account {user?.role === "admin" && "For Admin"}
+          </h1>
           <hr />
+          {user?.role === "admin" && (
+            <Form.Group className="mb-3">
+              <Form.Label>Select user type</Form.Label>
+              <Form.Select onChange={handleOnChange} required name="role">
+                <option value="">--select--</option>
+                <option value="admin">Admin</option>
+                <option value="student">Student</option>
+              </Form.Select>
+            </Form.Group>
+          )}
+
           {inputs.map((item, i) => (
             <CustomInput key={i} {...item} onChange={handleOnChange} />
           ))}
 
           <div className="d-grid">
             <Button variant="primary" type="submit">
-              Add New Admin
+              Create New Account
             </Button>
           </div>
         </Form>
@@ -122,4 +136,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Signup;

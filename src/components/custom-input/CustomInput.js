@@ -1,6 +1,7 @@
 import React from "react";
-import Form from "react-bootstrap/Form";
-const CustomInput = ({ label, ...rest }) => {
+import { Form } from "react-bootstrap";
+
+export const CustomInput = ({ label, ...rest }) => {
   return (
     <Form.Group className="mb-3">
       <Form.Label>{label}</Form.Label>
@@ -8,4 +9,3 @@ const CustomInput = ({ label, ...rest }) => {
     </Form.Group>
   );
 };
-export default CustomInput;

@@ -1,16 +1,23 @@
 import { configureStore } from "@reduxjs/toolkit";
-import userReducer from "../component/pages/signup-signin/userSlice.js";
+
+import userReducer from "./pages/signup-signin/userSlice";
+
 import { persistStore, persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
-const userPersistConfig = {
+import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
+
+const userPresistConfig = {
   key: "userInfo",
   storage,
 };
-const persistedUserReducer = persistReducer(userPersistConfig, userReducer);
+
+const persistedUserReducer = persistReducer(userPresistConfig, userReducer);
 const store = configureStore({
   reducer: {
     userInfo: persistedUserReducer,
+    testUser: userReducer,
   },
 });
+
 const persistor = persistStore(store);
+
 export { store, persistor };
