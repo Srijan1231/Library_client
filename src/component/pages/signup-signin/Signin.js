@@ -1,30 +1,53 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { useState } from "react";
 import { Header } from "../../layout/Header";
 import { Footer } from "../../layout/Footer";
+import CustomInput from "../../custom-input/CustomInput";
+import { signInAdminAction } from "./userAction";
+import { useDispatch } from "react-redux";
 
 const Signin = () => {
+  const [form, setForm] = useState();
+  const dispatch = useDispatch();
+  const handleOnChange = (e) => {
+    const { name, value } = e.target;
+    setForm({
+      ...form,
+      [name]: value,
+    });
+  };
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    dispatch(signInAdminAction(form));
+  };
+  const inputs = [
+    {
+      label: "Email",
+      name: "email",
+      required: true,
+      placeholder: "Sam@smith.com",
+      type: "email",
+    },
+    {
+      label: "Password",
+      name: "password",
+      required: true,
+      placeholder: "******",
+      type: "password",
+    },
+  ];
   return (
     <div>
       <Header />
       <section className="main">
-        <Form className="m-5 p-5 border shadow-lg">
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" placeholder="Enter email" />
-            <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
-            </Form.Text>
-          </Form.Group>
-
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicCheckbox">
-            <Form.Check type="checkbox" label="Check me out" />
-          </Form.Group>
+        <Form className="m-5 p-5 border shadow-lg" onSubmit={handleOnSubmit}>
+          <h1 className="text-center">Welcome Admin</h1>
+          <hr />
+          {inputs.map((item, i) => (
+            <CustomInput key={i} {...item} onChange={handleOnChange} />
+          ))}
           <Button variant="primary" type="submit">
             Submit
           </Button>
