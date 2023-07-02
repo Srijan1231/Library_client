@@ -1,9 +1,11 @@
 import { Button } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 function BookTable() {
   const { books } = useSelector((state) => state.bookInfo);
+
   return (
     <Table striped bordered hover>
       <thead>
@@ -28,7 +30,9 @@ function BookTable() {
             <td>{item.year}</td>
             <td>{item.summary}</td>
             <td>
-              <Button variant="warning">Edit</Button>
+              <Link to={`/books/edit/${item._id}`}>
+                <Button variant="warning">Edit</Button>
+              </Link>
             </td>
           </tr>
         ))}

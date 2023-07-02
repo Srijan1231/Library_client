@@ -3,19 +3,26 @@ import "./App.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Routes, Route } from "react-router-dom";
-
+import { useEffect } from "react";
 import Home from "./pages/home/Home";
 import Signup from "./pages/signup-signin/Signup";
 import Signin from "./pages/signup-signin/Signin";
-import Dashboard from "./pages/dashbnoard/Dashboard";
+import Dashboard from "./pages/dashboard/Dashboard";
 import { PrivateRoute } from "./components/private-route/PrivateRoute";
 import BurrowHistory from "./pages/burrow-history/BurrowHistory";
 import Books from "./pages/books/Books";
 import Profile from "./pages/profile/Profile";
 import Students from "./pages/students/Students";
 import { NewBookForm } from "./components/BookComp/NewBookForm";
+import { useDispatch } from "react-redux";
+import { fetchBookAction } from "./pages/books/BookAction";
+import { EditBookForm } from "./components/BookComp/EditBookForm";
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchBookAction());
+  }, [dispatch]);
   return (
     <div className="">
       <Routes>
@@ -55,6 +62,14 @@ function App() {
           element={
             <PrivateRoute>
               <NewBookForm />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/books/edit/:_id"
+          element={
+            <PrivateRoute>
+              <EditBookForm />
             </PrivateRoute>
           }
         />

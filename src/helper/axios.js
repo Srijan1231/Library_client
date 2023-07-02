@@ -53,3 +53,27 @@ export const fetchBooks = async () => {
     };
   }
 };
+export const updateBook = async (bookData) => {
+  try {
+    const { data } = await axios.put(bookAPI, bookData);
+
+    return data;
+  } catch (error) {
+    return {
+      status: "error",
+      message: error.message,
+    };
+  }
+};
+export const deleteBook = async (_id) => {
+  try {
+    const { data } = await axios.delete(bookAPI + "/" + _id);
+
+    return data;
+  } catch (error) {
+    return {
+      status: "error",
+      message: error.message,
+    };
+  }
+};
