@@ -4,6 +4,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 
 import { AiFillDashboard, AiFillHome } from "react-icons/ai";
+import { IoLibrarySharp } from "react-icons/io5";
 import { GiEntryDoor } from "react-icons/gi";
 import { ImExit } from "react-icons/im";
 import { useDispatch, useSelector } from "react-redux";
@@ -27,7 +28,9 @@ export const Header = () => {
   return (
     <Navbar expand="md" bg="dark" variant="dark">
       <Container>
-        <Navbar.Brand href="#home">LM</Navbar.Brand>
+        <Navbar.Brand href="/">
+          <IoLibrarySharp /> Library Portal
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
