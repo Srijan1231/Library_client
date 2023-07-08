@@ -3,9 +3,9 @@ import {
   fetchBooks,
   postBook,
   updateBook,
-} from "../../helper/axios";
+} from "../../helper/axios.js";
 import { toast } from "react-toastify";
-import { setBooks } from "./bookSlice";
+import { setBooks } from "./bookSlice.js";
 
 export const postBookAction = (bookObj) => async (dispatch) => {
   const dataPending = postBook(bookObj);
