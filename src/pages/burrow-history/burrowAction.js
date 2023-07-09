@@ -1,5 +1,9 @@
 import { toast } from "react-toastify";
-import { fetchBurrow, postBurrow } from "../../helper/axios.js";
+import {
+  fetchBurrow,
+  postBurrow,
+  updateBurrowBook,
+} from "../../helper/axios.js";
 import { fetchBookAction } from "../books/BookAction.js";
 import { setBurrow } from "./burrowSlice.js";
 
@@ -19,4 +23,19 @@ export const fetchBurrowAction = () => async (dispatch) => {
   console.log(status, message);
 
   dispatch(setBurrow(burrows));
+};
+export const updateBurrowAction = (burrowId) => async (dispatch) => {
+  const dataPending = updateBurrowBook(burrowId);
+  console.log(burrowId);
+
+  toast.promise(dataPending, {
+    pending: "Please wait...",
+  });
+  const { status, message } = await dataPending;
+  console.log(status, message);
+  toast[status](message);
+
+  if (status === "success") {
+    dispatch(fetchBurrowAction());
+  }
 };

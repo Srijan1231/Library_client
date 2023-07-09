@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Button, Table } from "react-bootstrap";
-
+import { fetchBurrowAction, updateBurrowAction } from "./burrowAction";
+import { useDispatch } from "react-redux";
 export const BurrowTable = () => {
   const { burrows } = useSelector((state) => state.burrowInfo);
+  const { user } = useSelector((state) => state.userInfo);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchBurrowAction());
+  }, [dispatch]);
+  const handleOnBurrowReturn = (burrowId) => {
+    if (window.confirm("Are you sure you want to return this book?")) {
+      dispatch(updateBurrowAction(burrowId));
+    }
+  };
 
   return (
     <>
@@ -15,10 +26,11 @@ export const BurrowTable = () => {
             <th>Title</th>
             <th>Burrowed by</th>
             <th>Due Date</th>
+            <th>Returned Date</th>
           </tr>
         </thead>
         <tbody>
-          {burrows.map((item, i) => (
+          {burrows?.map((item, i) => (
             <tr key={item._id}>
               <td>{i + 1}</td>
               <td>
@@ -27,8 +39,18 @@ export const BurrowTable = () => {
               <td>{item.bookName}</td>
               <td>{item.userName}</td>
               <td>{item.dueDate?.slice(0, 10)}</td>
+              <td>{item.returnDate?.slice(0, 10)}</td>
               <td>
-                <Button variant="warning">Edit</Button>
+                {item.userId === user._id && !item.isRetured ? (
+                  <Button
+                    variant="primary"
+                    onClick={() => handleOnBurrowReturn(item)}
+                  >
+                    Return
+                  </Button>
+                ) : (
+                  <></>
+                )}
               </td>
             </tr>
           ))}

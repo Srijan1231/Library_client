@@ -16,6 +16,11 @@ const getGetUserIDFromLocalStorage = () => {
   }
   return null;
 };
+const option = {
+  headers: {
+    Authorization: getGetUserIDFromLocalStorage(),
+  },
+};
 
 export const postUser = async (userData) => {
   try {
@@ -44,7 +49,7 @@ export const loginUser = async (userData) => {
 };
 export const postBook = async (bookData) => {
   try {
-    const { data } = await axios.post(bookAPI, bookData);
+    const { data } = await axios.post(bookAPI, bookData, option);
 
     return data;
   } catch (error) {
@@ -56,7 +61,7 @@ export const postBook = async (bookData) => {
 };
 export const fetchBooks = async () => {
   try {
-    const { data } = await axios.get(bookAPI);
+    const { data } = await axios.get(bookAPI, option);
 
     return data;
   } catch (error) {
@@ -68,7 +73,7 @@ export const fetchBooks = async () => {
 };
 export const updateBook = async (bookData) => {
   try {
-    const { data } = await axios.put(bookAPI, bookData);
+    const { data } = await axios.put(bookAPI, bookData, option);
 
     return data;
   } catch (error) {
@@ -80,11 +85,7 @@ export const updateBook = async (bookData) => {
 };
 export const deleteBook = async (_id) => {
   try {
-    const { data } = await axios.delete(bookAPI + "/" + _id, {
-      headers: {
-        Authorization: getGetUserIDFromLocalStorage(),
-      },
-    });
+    const { data } = await axios.delete(bookAPI + "/" + _id, option);
 
     return data;
   } catch (error) {
@@ -97,11 +98,7 @@ export const deleteBook = async (_id) => {
 //Burrow
 export const postBurrow = async (obj) => {
   try {
-    const { data } = await axios.post(burrowAPI, obj, {
-      headers: {
-        Authorization: getGetUserIDFromLocalStorage(),
-      },
-    });
+    const { data } = await axios.post(burrowAPI, obj, option);
 
     return data;
   } catch (error) {
@@ -113,12 +110,20 @@ export const postBurrow = async (obj) => {
 };
 export const fetchBurrow = async () => {
   try {
-    const { data } = await axios.get(burrowAPI, {
-      headers: {
-        Authorization: getGetUserIDFromLocalStorage(),
-      },
-    });
+    const { data } = await axios.get(burrowAPI, option);
 
+    return data;
+  } catch (error) {
+    return {
+      status: "error",
+      message: error.message,
+    };
+  }
+};
+export const updateBurrowBook = async (burrowId) => {
+  try {
+    const { data } = await axios.put(burrowAPI, burrowId, option);
+    console.log(burrowId);
     return data;
   } catch (error) {
     return {

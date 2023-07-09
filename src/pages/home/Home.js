@@ -45,7 +45,7 @@ const Home = () => {
               </div>
               <div className="book-list d-flex justify-content-between flex-wrap gap-3 mt-5">
                 {display.map((item) => (
-                  <Link to={`/books/${item._id}`}>
+                  <Link to={`/books/${item._id}`} className="nav-link">
                     <CustomCard key={item._id} {...item} />
                   </Link>
                 ))}
