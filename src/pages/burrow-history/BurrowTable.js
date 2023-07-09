@@ -1,9 +1,10 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Table } from "react-bootstrap";
+import { Button, Table } from "react-bootstrap";
 
 export const BurrowTable = () => {
   const { burrows } = useSelector((state) => state.burrowInfo);
+
   return (
     <>
       <Table striped bordered hover>
@@ -26,6 +27,9 @@ export const BurrowTable = () => {
               <td>{item.bookName}</td>
               <td>{item.userName}</td>
               <td>{item.dueDate?.slice(0, 10)}</td>
+              <td>
+                <Button variant="warning">Edit</Button>
+              </td>
             </tr>
           ))}
         </tbody>

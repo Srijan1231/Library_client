@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 import { fetchBurrow, postBurrow } from "../../helper/axios.js";
-// import { fetchBookAction } from "../books/BookAction.js";
+import { fetchBookAction } from "../books/BookAction.js";
 import { setBurrow } from "./burrowSlice.js";
 
 export const addBurrowAction = (obj) => async (dispatch) => {
@@ -9,7 +9,7 @@ export const addBurrowAction = (obj) => async (dispatch) => {
 
   if (status === "success") {
     //fetch user burrow
-
+    dispatch(fetchBookAction());
     dispatch(fetchBurrowAction());
   }
 };
