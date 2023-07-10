@@ -111,7 +111,7 @@ export const postBurrow = async (obj) => {
 export const fetchBurrow = async () => {
   try {
     const { data } = await axios.get(burrowAPI, option);
-
+    console.log(data);
     return data;
   } catch (error) {
     return {

@@ -32,7 +32,7 @@ const BookLanding = () => {
     <div>
       <Header />
       <section className="main mt-5">
-        <Container>
+        <Container fluid>
           <Row>
             <Col md="5">
               <img src={thumbnail} alt="" width="100%" />

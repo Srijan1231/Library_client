@@ -1,12 +1,14 @@
 import Card from "react-bootstrap/Card";
 
-function CustomCard({ title, author, thumbnail, summary }) {
+function CustomCard({ title, author, thumbnail }) {
   return (
-    <Card style={{ width: "20rem" }}>
+    <Card style={{ width: "15rem", height: "37rem" }}>
       <Card.Img variant="top" src={thumbnail} />
       <Card.Body>
         <Card.Title>{title}</Card.Title>
-        <h4>Author:{author}</h4>
+        <details>
+          <summary>Author:{author}</summary>
+        </details>
       </Card.Body>
     </Card>
   );

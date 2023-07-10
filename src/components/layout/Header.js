@@ -27,7 +27,7 @@ export const Header = () => {
   };
   return (
     <Navbar expand="md" bg="dark" variant="dark">
-      <Container>
+      <Container fluid>
         <Navbar.Brand href="/">
           <IoLibrarySharp /> Library Portal
         </Navbar.Brand>

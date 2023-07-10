@@ -31,7 +31,7 @@ const Home = () => {
         <div className="hero">
           <CustomCarousel />
         </div>
-        <Container className="mt-5">
+        <Container fluid className="mt-5">
           <Row>
             <Col>
               <div className="d-flex justify-content-between">
