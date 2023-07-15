@@ -43,6 +43,7 @@ export const BurrowTable = () => {
             <th>Burrowed by</th>
             <th>Due Date</th>
             <th>Returned Date</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -58,21 +59,18 @@ export const BurrowTable = () => {
               <td>{item.returnDate?.slice(0, 10)}</td>
               <td>
                 {item.userId === user._id && !item.isRetured ? (
-                  <Button
-                    variant="primary"
-                    onClick={() => handleOnBurrowReturn(item)}
-                  >
+                  <Button onClick={() => handleOnBurrowReturn(item)}>
                     Return
                   </Button>
+                ) : item?.reviewGiven ? (
+                  "review Given"
                 ) : (
-                  <>
-                    <Button
-                      variant="primary"
-                      onClick={() => handleOnReview(item)}
-                    >
-                      Leave Review
-                    </Button>
-                  </>
+                  <Button
+                    variant="success"
+                    onClick={() => handleOnReview(item)}
+                  >
+                    Leave review
+                  </Button>
                 )}
               </td>
             </tr>

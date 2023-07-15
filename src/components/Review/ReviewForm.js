@@ -3,8 +3,12 @@ import { Button, Form } from "react-bootstrap";
 import { CustomInput } from "../custom-input/CustomInput";
 import { AiFillStar } from "react-icons/ai";
 
+import { postReviewAction } from "../../pages/review/reviewAction";
+import { useDispatch } from "react-redux";
+
 export const ReviewForm = ({ selectedReview }) => {
-  const [form, setForm] = useState({ status: "inactive" });
+  const dispatch = useDispatch();
+  const [form, setForm] = useState({ status: "inactive", star: 5 });
   const handleOnChange = (e) => {
     const { name, value } = e.target;
     setForm({
@@ -14,6 +18,17 @@ export const ReviewForm = ({ selectedReview }) => {
   };
   const handleOnSubmit = (e) => {
     e.preventDefault();
+
+    const { _id, bookId, bookName, userId, userName } = selectedReview;
+    const obj = {
+      burrowHistoryId: _id,
+      bookId,
+      bookName,
+      userId,
+      userName,
+      ...form,
+    };
+    dispatch(postReviewAction(obj));
   };
   return (
     <div>
@@ -23,6 +38,7 @@ export const ReviewForm = ({ selectedReview }) => {
           name="title"
           placeholder="Best book ever"
           onChange={handleOnChange}
+          required="true"
         />
         <Form.Group className="mb-3">
           <Form.Label>Leave star</Form.Label>
@@ -87,9 +103,13 @@ export const ReviewForm = ({ selectedReview }) => {
           rows="5"
           placeholder="Best book ever, the way it is written..."
           onChange={handleOnChange}
+          required="true
+          "
         />
         <div className="d-grid">
-          <Button variant="success">Submit Review</Button>
+          <Button variant="success" type="submit">
+            Submit Review
+          </Button>
         </div>
       </Form>
     </div>

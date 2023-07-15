@@ -19,12 +19,15 @@ import { fetchBookAction } from "./pages/books/BookAction";
 import { EditBookForm } from "./components/BookComp/EditBookForm";
 import BookLanding from "./pages/books/BookLanding";
 import { fetchBurrowAction } from "./pages/burrow-history/burrowAction";
+import { fetchReviewAction } from "./pages/review/reviewAction";
+import { Review } from "./pages/review/Review";
 
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchBookAction());
     dispatch(fetchBurrowAction());
+    dispatch(fetchReviewAction());
   }, [dispatch]);
   return (
     <div className="">
@@ -49,6 +52,14 @@ function App() {
           element={
             <PrivateRoute>
               <BurrowHistory />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/reviews"
+          element={
+            <PrivateRoute>
+              <Review />
             </PrivateRoute>
           }
         />
