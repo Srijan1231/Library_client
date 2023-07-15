@@ -16,11 +16,6 @@ const getGetUserIDFromLocalStorage = () => {
   }
   return null;
 };
-const option = {
-  headers: {
-    Authorization: getGetUserIDFromLocalStorage(),
-  },
-};
 
 export const postUser = async (userData) => {
   try {
@@ -49,6 +44,11 @@ export const loginUser = async (userData) => {
 };
 export const postBook = async (bookData) => {
   try {
+    const option = {
+      headers: {
+        Authorization: getGetUserIDFromLocalStorage(),
+      },
+    };
     const { data } = await axios.post(bookAPI, bookData, option);
 
     return data;
@@ -61,6 +61,11 @@ export const postBook = async (bookData) => {
 };
 export const fetchBooks = async () => {
   try {
+    const option = {
+      headers: {
+        Authorization: getGetUserIDFromLocalStorage(),
+      },
+    };
     const { data } = await axios.get(bookAPI, option);
 
     return data;
@@ -73,6 +78,11 @@ export const fetchBooks = async () => {
 };
 export const updateBook = async (bookData) => {
   try {
+    const option = {
+      headers: {
+        Authorization: getGetUserIDFromLocalStorage(),
+      },
+    };
     const { data } = await axios.put(bookAPI, bookData, option);
 
     return data;
@@ -85,6 +95,11 @@ export const updateBook = async (bookData) => {
 };
 export const deleteBook = async (_id) => {
   try {
+    const option = {
+      headers: {
+        Authorization: getGetUserIDFromLocalStorage(),
+      },
+    };
     const { data } = await axios.delete(bookAPI + "/" + _id, option);
 
     return data;
@@ -98,6 +113,11 @@ export const deleteBook = async (_id) => {
 //Burrow
 export const postBurrow = async (obj) => {
   try {
+    const option = {
+      headers: {
+        Authorization: getGetUserIDFromLocalStorage(),
+      },
+    };
     const { data } = await axios.post(burrowAPI, obj, option);
 
     return data;
@@ -110,6 +130,11 @@ export const postBurrow = async (obj) => {
 };
 export const fetchBurrow = async () => {
   try {
+    const option = {
+      headers: {
+        Authorization: getGetUserIDFromLocalStorage(),
+      },
+    };
     const { data } = await axios.get(burrowAPI, option);
     console.log(data);
     return data;
@@ -122,6 +147,11 @@ export const fetchBurrow = async () => {
 };
 export const updateBurrowBook = async (burrowId) => {
   try {
+    const option = {
+      headers: {
+        Authorization: getGetUserIDFromLocalStorage(),
+      },
+    };
     const { data } = await axios.put(burrowAPI, burrowId, option);
     console.log(burrowId);
     return data;

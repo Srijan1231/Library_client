@@ -1,11 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Button, Table } from "react-bootstrap";
 import { fetchBurrowAction, updateBurrowAction } from "./burrowAction";
 import { useDispatch } from "react-redux";
+import { ReviewForm } from "../../components/Review/ReviewForm";
+import { CustomModal } from "../../components/modal/CustomModal";
+import { setModalShow } from "../../system/systemSlice";
 export const BurrowTable = () => {
   const { burrows } = useSelector((state) => state.burrowInfo);
   const { user } = useSelector((state) => state.userInfo);
+  const [selectedReview, setSelectedReview] = useState({});
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchBurrowAction());
@@ -15,9 +19,21 @@ export const BurrowTable = () => {
       dispatch(updateBurrowAction(burrowId));
     }
   };
+  const handleOnReview = (burrowBook) => {
+    setSelectedReview(burrowBook);
+    dispatch(setModalShow(true));
+  };
 
   return (
     <>
+      {selectedReview?._id && (
+        <CustomModal modalTitle={`${selectedReview.bookName}`}>
+          <h4>Leave Review</h4>
+          <hr />
+          <ReviewForm selectedReview={selectedReview} />
+        </CustomModal>
+      )}
+
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -49,7 +65,14 @@ export const BurrowTable = () => {
                     Return
                   </Button>
                 ) : (
-                  <></>
+                  <>
+                    <Button
+                      variant="primary"
+                      onClick={() => handleOnReview(item)}
+                    >
+                      Leave Review
+                    </Button>
+                  </>
                 )}
               </td>
             </tr>
