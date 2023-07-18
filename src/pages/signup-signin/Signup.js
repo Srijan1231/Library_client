@@ -76,6 +76,16 @@ const Signup = () => {
       type: "text",
     },
     {
+      label: "About You",
+      name: "yourself",
+
+      placeholder:
+        "I design and develop services for customers of all sizes, specializing in creating stylish, modern websites, web services and online stores. My passion is to design digital user experiences through the bold interface and meaningful interactions.",
+      type: "text",
+      as: "textarea",
+      row: "10",
+    },
+    {
       label: "Email",
       name: "email",
       required: true,

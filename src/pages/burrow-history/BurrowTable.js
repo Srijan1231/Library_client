@@ -62,7 +62,7 @@ export const BurrowTable = () => {
                   <Button onClick={() => handleOnBurrowReturn(item)}>
                     Return
                   </Button>
-                ) : item?.reviewGiven ? (
+                ) : item.reviewGiven ? (
                   "review Given"
                 ) : (
                   <Button
